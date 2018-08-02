@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app="phonecatApp">
+  <head>
+    <script src="../js/lib/angularJs/angular.min.js"></script>
+	<script>
+		var phonecatApp = angular.module('phonecatApp', []);
+ 
+phonecatApp.controller('PhoneListCtrl', function ($scope) {
+  $scope.phones = [
+    {'name': 'Nexus S1',
+     'snippet': 'Fast just got faster with Nexus S.',
+     'age': 1},
+    {'name': 'botorola XOOM? with Wi-Fi2',
+     'snippet': 'The Next, Next Generation tablet.',
+     'age': 2},
+    {'name': 'aOTOROLA XOOM?3',
+     'snippet': 'The Next, Next Generation tablet.',
+     'age': 3}
+  ];
+ 
+  $scope.orderProp = 'age';
+});
+	</script>
+  </head>
+ <body ng-controller="PhoneListCtrl">
+    <div>
+     Search: <input ng-model="query">
+  Sort by:
+  <select ng-model="orderProp">
+    <option value="name">Alphabetical</option>
+    <option value="-age">Newest</option>
+	<option value="unknown">unknown</option>
+  </select>
+ 
+  <ul class="phones">
+    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+      <span>{{phone.name}}</span>
+      <p>{{phone.snippet}}</p>
+    </li>
+  </ul>
+    </div>
+  </body>
+</html>
